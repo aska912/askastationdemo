@@ -13,6 +13,8 @@ def parse_xml(web_data):
         return ImageMsg(xmlData)
     elif msg_type == 'voice':
         return VoiceMsg(xmlData)
+	elif msg_type == 'location':
+	    return LocationMsg(xmlData)
 
 class Msg(object):
     def __init__(self, xmlData):
@@ -40,6 +42,17 @@ class VoiceMsg(Msg):
         self.Format = xmlData.find('Format').text
         self.MediaId = xmlData.find('MediaId').text
         self.Recognition = xmlData.find('Recognition').text
+		
+
+class LocationMsg(Msg):
+    def __init__(self, xmlData):
+        Msg.__init__(self, xmlData)
+		self.Location_X = xmlData.find('Location_X').text
+		self.Location_Y = xmlData.find('Location_Y').text
+		self.Scale = xmlData.find('Scale').text
+		self.Label = xmlData.find('Label').text
+
+
 
 
 
