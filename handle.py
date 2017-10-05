@@ -7,7 +7,7 @@ import reply
 import receive
 
 urls = (
-    '/wx', 'Handle',
+    '/wxtest', 'Handle',
 )
 
 app = web.application(urls, globals())
@@ -53,22 +53,22 @@ class Handle(object):
                         content = u'您有什么需要帮助的吗？'
                     elif recMsg.Content == 'test':
                         content = u'请选择测试项'
-                    elif recMsg.Content == '菜单':
-                        content = u"""\r[1]天气预报
-                                      \r[2]消消乐
-                                      \r[3]王者荣耀
-                                  """
                     else:
                         content = u"对不起,请原来小弟我才疏学浅，不明白您说的话！"
                 elif recMsg.MsgType == 'image':
-	            replyMsg = reply.ImageMsg(toUser, fromUser, recMsg.MediaId)
+                    replyMsg = reply.ImageMsg(toUser, fromUser, recMsg.MediaId)
                     return replyMsg.send()
                 elif recMsg.MsgType == 'voice':
                     content = u'您的声音真动听！'
-		else:
-		    content = u'未知的信息类型'
-                replyMsg = reply.TextMsg(toUser, fromUser, content)
-                return replyMsg.send()
+                elif recMsg.MsgType == 'location':
+                    content = u"坐标:\nX: %s\nY: %s"%(recMsg.Location_X,recMsg.Location_Y)
+                elif recMsg.MsgType == 'event':
+                    content = u"收到event消息，但该功能未开发。"
+            else:
+                content = u'未知的信息类型'
+
+            replyMsg = reply.TextMsg(toUser, fromUser, content)
+            return replyMsg.send()
             
             print "Not Process"
             return "success"

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 # filename: menu.py
 import urllib
 from basic import Token
@@ -38,7 +38,7 @@ if __name__ == '__main__':
             {
                 "type": "click",
                 "name": "开发指引",
-                "key":  "mpGuide"
+                "key":  "dev_guide"
             },
             {
                 "name": "公众平台",
@@ -58,6 +58,47 @@ if __name__ == '__main__':
                         "type": "view",
                         "name": "返回码说明",
                         "url": "http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433747234&token=&lang=zh_CN"
+                    },
+                    {
+                        "type": "scancode_waitmsg",
+                        "name": "扫码",
+                        "key": "scan_sub_menu"
+                    }
+                ]
+            },
+            {
+                "name": "发送",
+                "sub_button":
+                [
+                    {
+                        "type": "scancode_push",
+                        "name": "扫一扫",
+                        "key":  "send_menu_1_1",
+                        "sub_button":[]
+                    },
+                    {
+                        "type": "location_select",
+                        "name": "位置",
+                        "key":  "send_menu_1_2",
+                        "sub_button":[]
+                    },
+                    {
+                        "type": "pic_weixin",
+                        "name": "照片",
+                        "key":  "send_menu_1_3",
+                        "sub_button":[]
+                    },
+                    {
+                        "type": "pic_sysphoto",
+                        "name": "拍摄",
+                        "key":  "send_menu_1_4",
+                        "sub_button":[]
+                    },
+                    {
+                        "type": "pic_photo_or_album",
+                        "name": "照片or拍摄",
+                        "key":  "send_menu_1_5",
+                        "sub_button":[]
                     }
                 ]
             },
