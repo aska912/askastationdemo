@@ -76,7 +76,7 @@ class Token:
             #print "leftime: ", leftime
             #print "curtime: ", curtime
             if leftime > curtime:
-                print "Get token from tokenfile"
+                #print "Get token from tokenfile"
                 return tokenlines[self.token_index]
         if tokenlinenum < self.lines_num or leftime <= curtime:
            print "Get token from api.weixin.qq.com"
