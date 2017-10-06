@@ -32,6 +32,7 @@ class Token:
         self.tokenFile="/opt/weixin/access_token"
         self.time_index = 0
         self.token_index = 1
+        self.lines_num = 2
 
         self.__accessToken = ''
         self.__leftTime = 0
@@ -72,13 +73,13 @@ class Token:
         if tokenlinenum == 2:
             leftime = int(tokenlines[self.time_index])
             curtime = int(time.time())
-            print "leftime: ", leftime
-            print "curtime: ", curtime
+            #print "leftime: ", leftime
+            #print "curtime: ", curtime
             if leftime > curtime:
                 print "Get token from tokenfile"
                 return tokenlines[self.token_index]
-        if tokenlinenum == 0 or leftime <= curtime:
-           print "Update token from api.weixin.qq.com"
+        if tokenlinenum < self.lines_num or leftime <= curtime:
+           print "Get token from api.weixin.qq.com"
            self.__real_get_access_token()
            return self.__accessToken
 
