@@ -1,9 +1,10 @@
 ﻿# -*- coding: utf-8 -*-
 # filename: menu.py
+
 import urllib, json
-import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import Element
 from basic import Token
+
+import xml.etree.ElementTree as ET
 
 class Menu(object):
     def __init__(self):
@@ -20,15 +21,14 @@ class Menu(object):
         menuDict = {}
         menuTree = ET.parse(self.xmlfile)
         menuRoot = menuTree.getroot()
-        menuTag = menuRoot.tag
-        if menuTag == "menu": 
+        if menuRoot.tag == "menu": 
             menuTag="button"
             menuDict = {menuTag: []}
         else:
             return menuDict
         for button in menuRoot:
             btnName = button.attrib['name'].encode('utf-8')
-            if isinstance(button.find('subbutton'), Element):
+            if isinstance(button.find('subbutton'), ET.Element):
                 btnDict = {'name': btnName, "sub_button": []}
                 for subutton in button:
                     subtnName = subutton.attrib['name'].encode('utf-8')
@@ -86,80 +86,6 @@ class Menu(object):
         return urlResp.read()
 
 if __name__ == '__main__':
-    postJson = """
-    {
-        "button":
-        [
-            {
-                "type": "click",
-                "name": "开发指引",
-                "key":  "dev_guide"
-            },
-            {
-                "name": "公众平台",
-                "sub_button":
-                [
-                    {
-                        "type": "view",
-                        "name": "更新公告",
-                        "url": "http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1418702138&token=&lang=zh_CN"
-                    },
-                    {
-                        "type": "view",
-                        "name": "接口权限说明",
-                        "url": "http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1418702138&token=&lang=zh_CN"
-                    },
-                    {
-                        "type": "view",
-                        "name": "返回码说明",
-                        "url": "http://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1433747234&token=&lang=zh_CN"
-                    },
-                    {
-                        "type": "scancode_waitmsg",
-                        "name": "扫码",
-                        "key": "scan_sub_menu"
-                    }
-                ]
-            },
-            {
-                "name": "发送",
-                "sub_button":
-                [
-                    {
-                        "type": "scancode_push",
-                        "name": "扫一扫",
-                        "key":  "send_menu_1_1",
-                        "sub_button":[]
-                    },
-                    {
-                        "type": "location_select",
-                        "name": "位置",
-                        "key":  "send_menu_1_2",
-                        "sub_button":[]
-                    },
-                    {
-                        "type": "pic_weixin",
-                        "name": "照片",
-                        "key":  "send_menu_1_3",
-                        "sub_button":[]
-                    },
-                    {
-                        "type": "pic_sysphoto",
-                        "name": "拍摄",
-                        "key":  "send_menu_1_4",
-                        "sub_button":[]
-                    },
-                    {
-                        "type": "pic_photo_or_album",
-                        "name": "照片or拍摄",
-                        "key":  "send_menu_1_5",
-                        "sub_button":[]
-                    }
-                ]
-            },
-          ]
-    }
-    """
     myMenu = Menu()
     accessToken = Token().get_access_token()
     print myMenu.create(myMenu.readConfig(), accessToken)
