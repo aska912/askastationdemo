@@ -5,44 +5,44 @@
         <key>dev_guide</key>
     </button>
     <button name="公众平台">
-        <subbutton name="更新公告">
+        <sub_button name="更新公告">
             <type>view</type>
             <url>http://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1418702138&amp;token=&amp;lang=zh_CN</url>
-        </subbutton>
-        <subbutton name="接口权限说明">
+        </sub_button>
+        <sub_button name="接口权限说明">
             <type>view</type>
             <url>https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084</url>
-        </subbutton>
-        <subbutton name="返回码说明">
+        </sub_button>
+        <sub_button name="返回码说明">
             <type>view</type>
             <url>https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433747234</url>
-        </subbutton>
-        <subbutton name="扫码">
+        </sub_button>
+        <sub_button name="扫码">
             <type>scancode_waitmsg</type>
             <key>scan_sub_menu</key>
-        </subbutton>
+        </sub_button>
     </button>
     <button name="发送">
-        <subbutton name="扫一扫">
+        <sub_button name="扫一扫">
             <type>scancode_push</type>
             <key>send_menu_1_1</key>
-        </subbutton>
-        <subbutton name="位置">
+        </sub_button>
+        <sub_button name="位置">
             <type>location_select</type>
             <key>send_menu_1_2</key>
-        </subbutton>
-        <subbutton name="照片">
+        </sub_button>
+        <sub_button name="照片">
             <type>pic_weixin</type>
             <key>send_menu_1_3</key>
-        </subbutton>
-        <subbutton name="拍摄">
+        </sub_button>
+        <sub_button name="拍摄">
             <type>pic_sysphoto</type>
             <key>send_menu_1_4</key>
-        </subbutton>
-        <subbutton name="照片or拍摄">
+        </sub_button>
+        <sub_button name="照片or拍摄">
             <type>pic_photo_or_album</type>
             <key>send_menu_1_5</key>
-        </subbutton>
+        </sub_button>
     </button>
 </menu>
 

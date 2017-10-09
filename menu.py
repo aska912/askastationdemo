@@ -10,22 +10,25 @@ class Menu(object):
     def __init__(self):
         self.mainCfgXml="menu.xml"
 
-    def readConfig(self):
-        #Convert XML to python struct
-        cfgXmlData = self.parseXml(self.mainCfgXml)
+    def readConfig(self, cfgXmlFile=""):
+        if cfgXmlFile == "":
+            #Convert XML to python struct
+            cfgXmlData = self.parseXml(self.mainCfgXml)
+        else:
+            cfgXmlData = self.parseXml(cfgXmlFile)
         #Convert pystruct to JSON
         return (json.dumps(cfgXmlData, ensure_ascii=False, encoding="utf-8") if len(cfgXmlData) else None)
 
     def parseXml(self, configXml):
         btnElmtName = "button"
         mrElmtName = "matchrule"
-        subtnElmtName = "subbutton"
+        subtnElmtName = "sub_button"
         menuDict = {}
         menuTree = ET.parse(configXml)
         menuRoot = menuTree.getroot()
         
         hasBtnElmt = True if isinstance(menuRoot.find(btnElmtName), ET.Element) else False
-        hasMrElmt = True if isinstance(menuRoot.find(mrElmtname), ET.Element) else False
+        hasMrElmt = True if isinstance(menuRoot.find(mrElmtName), ET.Element) else False
         if hasBtnElmt and hasMrElmt:
             menuDict = {btnElmtName: [], mrElmtName:{}}
         elif hasBtnElmt and not hasMrElmt:
@@ -37,7 +40,7 @@ class Menu(object):
             if element.tag == btnElmtName:
                 btnElement = element
                 btnName = btnElement.attrib['name'].encode('utf-8')
-                if isinstance(button.find(subtnElmtName), ET.Element):
+                if isinstance(btnElement.find(subtnElmtName), ET.Element):
                     btnDict = {'name': btnName, subtnElmtName: []}
                     for subutton in btnElement:
                         subtnName = subutton.attrib['name'].encode('utf-8')
@@ -46,7 +49,7 @@ class Menu(object):
                         subtnArg = subutton.find(subtnArgName).text
                         subtnDict = {'name': subtnName, 'type': subtnType, \
                                      subtnArgName: subtnArg}
-                        btnDict[subtnElmt].append(subtnDict)
+                        btnDict[subtnElmtName].append(subtnDict)
                 else:
                     btnType = btnElement.find('type').text
                     btnArgName = self.keyOrUrl(btnType)
@@ -63,12 +66,13 @@ class Menu(object):
                     print "no %s object in menuDict"%mrElmtName
                     return {}
                 for subElemnt in subElemnts:
-                    if mrElement.find(subElemnt).text:
-                        menuDict[mrElmtName].update({subElemnt: mrElement.find('tag_id').text})
+                    subElemntString = mrElement.find(subElemnt).text
+                    if subElemntString:
+                        menuDict[mrElmtName].update({subElemnt: subElemntString})
                         num -= 1
                 if num == subElemntNum:
                     return {}
-            return menuDict
+        return menuDict
             
 
     def keyOrUrl(self, btnType):
@@ -114,7 +118,7 @@ class Menu(object):
         urlResp = urllib.urlopen(url=postUrl)
         return urlResp.read()
     
-    #删除个性化菜单
+    #测试个性化菜单
     def testCustomMenu(self, accessToken):
         postUrl = "https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token=%s"%accessToken
         urlResp = urllib.urlopen(url=postUrl)
@@ -134,6 +138,7 @@ if __name__ == '__main__':
         print "[2] Query the menu"
         print "[3] Delete the menu"
         print "[4] Get selfmenu info"
+        print "[5] Create the custom menu"
         print "[*] Press any key to exit"
         opt = raw_input()
         accessToken = Token().get_access_token()
@@ -151,5 +156,7 @@ if __name__ == '__main__':
             #menuInfo = json.loads(myMenu.get_current_selfmenu_info(accessToken))
             #print menuInfo
             print myMenu.get_current_selfmenu_info(accessToken)
+        elif opt == '5':
+            print myMenu.createCustomMenu(myMenu.readConfig("custommenu_android.xml"), accessToken)
         else:
             break
