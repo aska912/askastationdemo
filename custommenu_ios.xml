@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu>
-    <button name="开发指引">
+    <button name="IOS">
         <type>click</type>
         <key>dev_guide</key>
     </button>
@@ -48,7 +48,7 @@
 	      <!--用户标签的id，可通过用户标签管理接口获取-->
 	      <tag_id></tag_id>
 		    <!-- 男（1）女（2）-->
-		    <sex>1</sex>
+		    <sex></sex>
 		    <!--国家信息，是用户在微信中设置的地区，具体请参考地区信息表-->
 		    <country></country>
 		    <!--省份信息-->
