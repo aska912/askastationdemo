@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+    <button name="IOS">
+        <type>click</type>
+        <key>dev_guide</key>
+    </button>
+    <button name="公众平台">
+        <subbutton name="更新公告">
+            <type>view</type>
+            <url>http://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1418702138&amp;token=&amp;lang=zh_CN</url>
+        </subbutton>
+        <subbutton name="接口权限说明">
+            <type>view</type>
+            <url>https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433401084</url>
+        </subbutton>
+        <subbutton name="返回码说明">
+            <type>view</type>
+            <url>https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1433747234</url>
+        </subbutton>
+        <subbutton name="扫码">
+            <type>scancode_waitmsg</type>
+            <key>scan_sub_menu</key>
+        </subbutton>
+    </button>
+    <button name="发送">
+        <subbutton name="扫一扫">
+            <type>scancode_push</type>
+            <key>send_menu_1_1</key>
+        </subbutton>
+        <subbutton name="位置">
+            <type>location_select</type>
+            <key>send_menu_1_2</key>
+        </subbutton>
+        <subbutton name="照片">
+            <type>pic_weixin</type>
+            <key>send_menu_1_3</key>
+        </subbutton>
+        <subbutton name="拍摄">
+            <type>pic_sysphoto</type>
+            <key>send_menu_1_4</key>
+        </subbutton>
+        <subbutton name="照片or拍摄">
+            <type>pic_photo_or_album</type>
+            <key>send_menu_1_5</key>
+        </subbutton>
+    </button>
+	  <matchrule>
+	      <!--用户标签的id，可通过用户标签管理接口获取-->
+	      <tag_id></tag_id>
+		    <!-- 男（1）女（2）-->
+		    <sex></sex>
+		    <!--国家信息，是用户在微信中设置的地区，具体请参考地区信息表-->
+		    <country></country>
+		    <!--省份信息-->
+		    <province></province>
+		    <!--城市信息-->
+		    <city></city>
+		    <!--client_platform_type: ios(1), android(2), other(3)-->
+		    <client_platform_type>1</client_platform_type>
+		    <language>zh_CN</language>
+	  </matchrule>
+</menu>
+
+<!--language:
+1、简体中文 "zh_CN" 2、繁体中文TW "zh_TW" 3、繁体中文HK "zh_HK" 
+4、英文 "en" 5、印尼 "id" 6、马来 "ms" 7、西班牙 "es" 8、韩国 "ko" 
+9、意大利 "it" 10、日本 "ja" 11、波兰 "pl" 12、葡萄牙 "pt" 
+13、俄国 "ru" 14、泰文 "th" 15、越南 "vi" 16、阿拉伯语 "ar" 
+17、北印度 "hi" 18、希伯来 "he" 19、土耳其 "tr" 20、德语 "de" 21、法语 "fr"
+-->
